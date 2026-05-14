@@ -11,10 +11,10 @@ const STATS = [
 ];
 
 const CITIES = [
-  { name: "Marrakech", image: "https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=600&h=800&fit=crop", desc: "La ville rouge" },
-  { name: "Casablanca", image: "https://images.unsplash.com/photo-1569383746724-6f1b882b8f46?w=600&h=800&fit=crop", desc: "La métropole" },
-  { name: "Tanger", image: "https://images.unsplash.com/photo-1553899017-bd7e53180980?w=600&h=800&fit=crop", desc: "Porte de l'Afrique" },
-  { name: "Agadir", image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&h=800&fit=crop", desc: "La station balnéaire" },
+  { name: "Marrakech", image: "https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80", desc: "La Koutoubia" },
+  { name: "Casablanca", image: "https://images.unsplash.com/photo-1549413204-747d91ec0882?w=800&q=80", desc: "Mosquée Hassan II" },
+  { name: "Tanger", image: "https://images.unsplash.com/photo-1553899017-bd7e53180980?w=800&q=80", desc: "La Corniche" },
+  { name: "Agadir", image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80", desc: "La Baie d'Agadir" },
 ];
 
 const FEATURES = [
@@ -38,8 +38,8 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=1080&fit=crop"
-            alt="Maroc"
+            src="https://images.unsplash.com/photo-1539129790489-e82aa9d3fc5f?w=1920&q=80"
+            alt="Désert du Sahara Maroc"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />

@@ -8,7 +8,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log("Initialisation complète de la base de données (10 véhicules)...");
+  console.log("Mise à jour finale des véhicules et villes...");
 
   db.query("CREATE DATABASE IF NOT EXISTS location_db", (err) => {
     if (err) throw err;
@@ -91,7 +91,6 @@ db.connect((err) => {
 });
 
 function seedData(db) {
-  // Users (all with pass123)
   const password = "pass123";
   const users = [
     ['Mohammed Admin', 'admin@marocauto.ma', password, 'admin', null],
@@ -102,12 +101,10 @@ function seedData(db) {
   
   db.query("INSERT INTO users (name, email, password, role, agency_name) VALUES ?", [users], (err) => {
     if (err) throw err;
-    console.log("Utilisateurs insérés.");
     
-    // 10 Vehicles
     const vehicles = [
-      ["v1", "Mercedes-Benz", "Classe C 220d", 2023, 850, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1618843479619-f3d0d81e4d10?w=800&q=80", "Berline de prestige idéale pour vos déplacements professionnels.", true, "AutoLux Casablanca"],
-      ["v2", "BMW", "X5 xDrive40d", 2023, 1200, "Marrakech", "SUV", "Automatique", "Diesel", 7, "https://images.unsplash.com/photo-1571127236794-81c0bbfe1ce3?w=800&q=80", "SUV premium pour explorer le Maroc en toute élégance.", true, "PremiumCar Marrakech"],
+      ["v1", "Mercedes-Benz", "Classe C 220d", 2023, 850, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1617469165786-8007eda3caa7?w=800&q=80", "Berline de prestige idéale pour vos déplacements professionnels.", true, "AutoLux Casablanca"],
+      ["v2", "BMW", "X5 xDrive40d", 2023, 1200, "Marrakech", "SUV", "Automatique", "Diesel", 7, "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80", "SUV premium pour explorer le Maroc en toute élégance.", true, "PremiumCar Marrakech"],
       ["v3", "Dacia", "Sandero Stepway", 2022, 250, "Agadir", "Économique", "Manuelle", "Essence", 5, "https://images.caradisiac.com/logos/3/8/3/6/263836/S8-essai-dacia-sandero-stepway-2021-le-choix-malin-187126.jpg", "Voiture économique et fiable pour découvrir Agadir.", true, "EcoCar Agadir"],
       ["v4", "Range Rover", "Sport HSE", 2024, 2500, "Marrakech", "Luxe", "Automatique", "Hybride", 5, "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=800&q=80", "L'excellence britannique pour une expérience inoubliable.", true, "PremiumCar Marrakech"],
       ["v5", "Audi", "A6 Sedan", 2023, 900, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?w=800&q=80", "Confort et technologie allemande pour vos trajets urbains.", true, "AutoLux Casablanca"],
@@ -120,7 +117,7 @@ function seedData(db) {
     
     db.query("INSERT INTO vehicles (id, brand, model, year, price_per_day, city, category, transmission, fuel_type, seats, image_url, description, available, agency_name) VALUES ?", [vehicles], (err) => {
       if (err) throw err;
-      console.log("Catalogue de 10 véhicules inséré !");
+      console.log("Catalogue et villes mis à jour avec succès !");
       db.end();
     });
   });
