@@ -145,7 +145,7 @@ export default function LoginPage() {
                   {role === "admin" && "admin@marocauto.ma"}
                   {role === "agency" && "agence@autolux.ma"}
                   {role === "client" && "client@email.ma"}
-                  <span className="text-white/40 ml-2">/ agency123</span>
+                  <span className="text-white/40 ml-2">/ pass123</span>
                 </p>
               </div>
 
