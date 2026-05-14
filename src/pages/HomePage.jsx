@@ -11,10 +11,26 @@ const STATS = [
 ];
 
 const CITIES = [
-  { name: "Marrakech", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Koutoubia_Mosque_Marrakech.jpg/1200px-Koutoubia_Mosque_Marrakech.jpg", desc: "La Koutoubia" },
-  { name: "Casablanca", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Hassan_II_Mosque_Casablanca_Morocco.jpg/1200px-Hassan_II_Mosque_Casablanca_Morocco.jpg", desc: "Mosquée Hassan II" },
-  { name: "Tanger", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Tanger_Port_View.jpg/1200px-Tanger_Port_View.jpg", desc: "La Corniche" },
-  { name: "Agadir", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Agadir_Bay_Morocco.jpg/1200px-Agadir_Bay_Morocco.jpg", desc: "La Baie d'Agadir" },
+  {
+    name: "Marrakech",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Koutoubia-Minaret.jpg/800px-Koutoubia-Minaret.jpg",
+    desc: "La Koutoubia"
+  },
+  {
+    name: "Casablanca",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Mosque_Hassan_II.jpg/1280px-Mosque_Hassan_II.jpg",
+    desc: "Mosquée Hassan II"
+  },
+  {
+    name: "Tanger",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Cap_Spartel%2C_Tangier%2C_Morocco_-_panoramio_%281%29.jpg/1280px-Cap_Spartel%2C_Tangier%2C_Morocco_-_panoramio_%281%29.jpg",
+    desc: "Cap Spartel"
+  },
+  {
+    name: "Agadir",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/90/South_view_sea_side_from_Kasbah_of_Agadir_Oufella.jpg",
+    desc: "La Baie d'Agadir"
+  },
 ];
 
 const FEATURES = [
