@@ -117,6 +117,15 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 5000;
+// Récupérer les images d'un véhicule
+app.get('/api/vehicles/:id/images', (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM vehicle_images WHERE vehicle_id = ?', [id], (err, results) => {
+    if (err) return res.status(500).json(err);
+    res.json(results);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });

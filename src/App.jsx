@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import CataloguePage from "./pages/CataloguePage";
 import ReservationsPage from "./pages/ReservationsPage";
+import VehicleDetailPage from "./pages/VehicleDetailPage";
 
 export default function App() {
   const { user } = useAuth();
@@ -35,6 +36,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalogue" element={<CataloguePage />} />
+          <Route path="/vehicule/:id" element={<VehicleDetailPage />} />
           <Route path="/reservations" element={<ReservationsPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

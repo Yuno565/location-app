@@ -40,5 +40,10 @@ export const api = {
       body: JSON.stringify({ status }),
     });
     return res.json();
-  }
+  },
+
+  async getVehicleImages(id) {
+    const res = await fetch(`${API_URL}/vehicles/${id}/images`);
+    return res.json();
+  },
 };

@@ -242,7 +242,7 @@ function VehicleCard({ vehicle, onDetail, onReserve }) {
   return (
     <div className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
       {/* Image — click to see details */}
-      <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={onDetail}>
+      <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={() => window.location.href = `/vehicule/${vehicle.id}`}>
         <img
           src={vehicle.image_url}
           alt={`${vehicle.brand} ${vehicle.model}`}

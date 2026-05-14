@@ -206,7 +206,7 @@ function VehicleCard({ vehicle }) {
   };
 
   return (
-    <Link to="/catalogue" className="group block bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+    <Link to={`/vehicule/${vehicle.id}`} className="group block bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={vehicle.image_url}
