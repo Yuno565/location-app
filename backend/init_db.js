@@ -8,7 +8,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log("Mise à jour finale des véhicules et villes...");
+  console.log("Mise à jour finale des véhicules (Liens Google/Wikipedia)...");
 
   db.query("CREATE DATABASE IF NOT EXISTS location_db", (err) => {
     if (err) throw err;
@@ -103,21 +103,21 @@ function seedData(db) {
     if (err) throw err;
     
     const vehicles = [
-      ["v1", "Mercedes-Benz", "Classe C 220d", 2023, 850, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1617469165786-8007eda3caa7?w=800&q=80", "Berline de prestige idéale pour vos déplacements professionnels.", true, "AutoLux Casablanca"],
-      ["v2", "BMW", "X5 xDrive40d", 2023, 1200, "Marrakech", "SUV", "Automatique", "Diesel", 7, "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80", "SUV premium pour explorer le Maroc en toute élégance.", true, "PremiumCar Marrakech"],
+      ["v1", "Mercedes-Benz", "Classe C 220d", 2023, 850, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Mercedes-Benz_W206_Front-view.jpg/1200px-Mercedes-Benz_W206_Front-view.jpg", "Berline de prestige idéale pour vos déplacements professionnels.", true, "AutoLux Casablanca"],
+      ["v2", "BMW", "X5 xDrive40d", 2023, 1200, "Marrakech", "SUV", "Automatique", "Diesel", 7, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/BMW_X5_G05_IMG_1495.jpg/1200px-BMW_X5_G05_IMG_1495.jpg", "SUV premium pour explorer le Maroc en toute élégance.", true, "PremiumCar Marrakech"],
       ["v3", "Dacia", "Sandero Stepway", 2022, 250, "Agadir", "Économique", "Manuelle", "Essence", 5, "https://images.caradisiac.com/logos/3/8/3/6/263836/S8-essai-dacia-sandero-stepway-2021-le-choix-malin-187126.jpg", "Voiture économique et fiable pour découvrir Agadir.", true, "EcoCar Agadir"],
-      ["v4", "Range Rover", "Sport HSE", 2024, 2500, "Marrakech", "Luxe", "Automatique", "Hybride", 5, "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=800&q=80", "L'excellence britannique pour une expérience inoubliable.", true, "PremiumCar Marrakech"],
-      ["v5", "Audi", "A6 Sedan", 2023, 900, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?w=800&q=80", "Confort et technologie allemande pour vos trajets urbains.", true, "AutoLux Casablanca"],
-      ["v6", "Porsche", "911 Carrera", 2024, 4500, "Marrakech", "Luxe", "Automatique", "Essence", 2, "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80", "La légende sportive pour des sensations fortes à Marrakech.", true, "PremiumCar Marrakech"],
-      ["v7", "Volkswagen", "Golf 8 R-Line", 2023, 550, "Tanger", "Compacte", "Automatique", "Diesel", 5, "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=80", "Polyvalente et moderne, parfaite pour la ville de Tanger.", true, "TangerDrive"],
-      ["v8", "Jeep", "Wrangler Rubicon", 2023, 1100, "Agadir", "4x4", "Automatique", "Essence", 5, "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80", "Dominez tous les terrains avec ce 4x4 mythique.", true, "EcoCar Agadir"],
-      ["v9", "Toyota", "Land Cruiser Prado", 2023, 1300, "Rabat", "SUV", "Automatique", "Diesel", 7, "https://images.unsplash.com/photo-1594502184342-2e12f877aa73?w=800&q=80", "Le roi de la route pour vos voyages en famille.", true, "Rabat Prestige"],
-      ["v10", "Tesla", "Model 3 Performance", 2024, 1500, "Casablanca", "Electrique", "Automatique", "Electrique", 5, "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80", "Vivez le futur de la conduite avec cette Tesla surpuissante.", true, "AutoLux Casablanca"]
+      ["v4", "Range Rover", "Sport HSE", 2024, 2500, "Marrakech", "Luxe", "Automatique", "Hybride", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Range_Rover_Sport_L461_Front_View.jpg/1200px-Range_Rover_Sport_L461_Front_View.jpg", "L'excellence britannique pour une expérience inoubliable.", true, "PremiumCar Marrakech"],
+      ["v5", "Audi", "A6 Sedan", 2023, 900, "Casablanca", "Berline", "Automatique", "Diesel", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Audi_A6_C8_Front-view.jpg/1200px-Audi_A6_C8_Front-view.jpg", "Confort et technologie allemande pour vos trajets urbains.", true, "AutoLux Casablanca"],
+      ["v6", "Porsche", "911 Carrera", 2024, 4500, "Marrakech", "Luxe", "Automatique", "Essence", 2, "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Porsche_911_Carrera_4S_992_Front_View.jpg/1200px-Porsche_911_Carrera_4S_992_Front_View.jpg", "La légende sportive pour des sensations fortes à Marrakech.", true, "PremiumCar Marrakech"],
+      ["v7", "Volkswagen", "Golf 8 R-Line", 2023, 550, "Tanger", "Compacte", "Automatique", "Diesel", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Volkswagen_Golf_8_Front-view.jpg/1200px-Volkswagen_Golf_8_Front-view.jpg", "Polyvalente et moderne, parfaite pour la ville de Tanger.", true, "TangerDrive"],
+      ["v8", "Jeep", "Wrangler Rubicon", 2023, 1100, "Agadir", "4x4", "Automatique", "Essence", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/2018_Jeep_Wrangler_Rubicon_Front.jpg/1200px-2018_Jeep_Wrangler_Rubicon_Front.jpg", "Dominez tous les terrains avec ce 4x4 mythique.", true, "EcoCar Agadir"],
+      ["v9", "Toyota", "Land Cruiser Prado", 2023, 1300, "Rabat", "SUV", "Automatique", "Diesel", 7, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Toyota_Land_Cruiser_Prado_J150_Front.jpg/1200px-Toyota_Land_Cruiser_Prado_J150_Front.jpg", "Le roi de la route pour vos voyages en famille.", true, "Rabat Prestige"],
+      ["v10", "Tesla", "Model 3 Performance", 2024, 1500, "Casablanca", "Electrique", "Automatique", "Electrique", 5, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/2019_Tesla_Model_3_Performance_Front.jpg/1200px-2019_Tesla_Model_3_Performance_Front.jpg", "Vivez le futur de la conduite avec cette Tesla surpuissante.", true, "AutoLux Casablanca"]
     ];
     
     db.query("INSERT INTO vehicles (id, brand, model, year, price_per_day, city, category, transmission, fuel_type, seats, image_url, description, available, agency_name) VALUES ?", [vehicles], (err) => {
       if (err) throw err;
-      console.log("Catalogue et villes mis à jour avec succès !");
+      console.log("Catalogue mis à jour avec des photos réelles !");
       db.end();
     });
   });

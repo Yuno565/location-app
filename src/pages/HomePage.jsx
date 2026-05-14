@@ -11,10 +11,10 @@ const STATS = [
 ];
 
 const CITIES = [
-  { name: "Marrakech", image: "https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80", desc: "La Koutoubia" },
-  { name: "Casablanca", image: "https://images.unsplash.com/photo-1549413204-747d91ec0882?w=800&q=80", desc: "Mosquée Hassan II" },
-  { name: "Tanger", image: "https://images.unsplash.com/photo-1553899017-bd7e53180980?w=800&q=80", desc: "La Corniche" },
-  { name: "Agadir", image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80", desc: "La Baie d'Agadir" },
+  { name: "Marrakech", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Koutoubia_Mosque_Marrakech.jpg/1200px-Koutoubia_Mosque_Marrakech.jpg", desc: "La Koutoubia" },
+  { name: "Casablanca", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Hassan_II_Mosque_Casablanca_Morocco.jpg/1200px-Hassan_II_Mosque_Casablanca_Morocco.jpg", desc: "Mosquée Hassan II" },
+  { name: "Tanger", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Tanger_Port_View.jpg/1200px-Tanger_Port_View.jpg", desc: "La Corniche" },
+  { name: "Agadir", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Agadir_Bay_Morocco.jpg/1200px-Agadir_Bay_Morocco.jpg", desc: "La Baie d'Agadir" },
 ];
 
 const FEATURES = [
