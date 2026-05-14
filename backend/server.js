@@ -1,11 +1,44 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// --- UPLOADS CONFIG ---
+const uploadsDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Serve uploaded images as static files
+app.use("/uploads", express.static(uploadsDir));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
+    cb(null, uniqueName);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB max
+  fileFilter: (req, file, cb) => {
+    const allowed = /jpeg|jpg|png|webp/;
+    const ext = allowed.test(path.extname(file.originalname).toLowerCase());
+    const mime = allowed.test(file.mimetype);
+    if (ext && mime) return cb(null, true);
+    cb(new Error("Seuls les fichiers JPEG, PNG et WebP sont acceptés."));
+  },
+});
+
+// --- DATABASE ---
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -50,6 +83,98 @@ app.post("/api/login", (req, res) => {
 app.get("/api/vehicles", (req, res) => {
   db.query("SELECT * FROM vehicles", (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
+    res.json(results);
+  });
+});
+
+// Ajouter un véhicule avec upload de photos
+app.post("/api/vehicles", upload.array("photos", 5), (req, res) => {
+  const { brand, model, year, price_per_day, city, category, transmission, fuel_type, seats, description, agency_name } = req.body;
+  
+  // Generate unique ID
+  const vehicleId = "v" + Date.now();
+  
+  // Main image = first uploaded file, or placeholder
+  const mainImageUrl = req.files && req.files.length > 0
+    ? `http://localhost:5000/uploads/${req.files[0].filename}`
+    : "https://via.placeholder.com/600x400?text=No+Image";
+  
+  const sql = `INSERT INTO vehicles 
+    (id, brand, model, year, price_per_day, city, category, transmission, fuel_type, seats, image_url, description, available, agency_name) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, TRUE, ?)`;
+  
+  const values = [vehicleId, brand, model, parseInt(year), parseInt(price_per_day), city, category, transmission, fuel_type, parseInt(seats), mainImageUrl, description || "", agency_name];
+  
+  db.query(sql, values, (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    
+    // Insert all uploaded images into vehicle_images table
+    if (req.files && req.files.length > 0) {
+      const imageValues = req.files.map((file, index) => [
+        vehicleId,
+        `http://localhost:5000/uploads/${file.filename}`,
+        index === 0 // first image is main
+      ]);
+      
+      db.query("INSERT INTO vehicle_images (vehicle_id, url, is_main) VALUES ?", [imageValues], (err) => {
+        if (err) console.error("Erreur insertion images:", err.message);
+        res.json({ success: true, id: vehicleId, message: "Véhicule ajouté avec succès !" });
+      });
+    } else {
+      res.json({ success: true, id: vehicleId, message: "Véhicule ajouté (sans photos)." });
+    }
+  });
+});
+
+// Modifier un véhicule (avec optionnel upload de photos)
+app.put("/api/vehicles/:id", upload.array("photos", 5), (req, res) => {
+  const { id } = req.params;
+  const { brand, model, year, price_per_day, city, category, transmission, fuel_type, seats, description, agency_name } = req.body;
+  
+  // 1. Mettre à jour les informations du véhicule
+  let sql = `UPDATE vehicles SET brand=?, model=?, year=?, price_per_day=?, city=?, category=?, transmission=?, fuel_type=?, seats=?, description=?, agency_name=?`;
+  let values = [brand, model, parseInt(year), parseInt(price_per_day), city, category, transmission, fuel_type, parseInt(seats), description || "", agency_name];
+  
+  // Si de nouvelles images sont uploadées, on met à jour la photo principale
+  if (req.files && req.files.length > 0) {
+    const mainImageUrl = `http://localhost:5000/uploads/${req.files[0].filename}`;
+    sql += `, image_url=?`;
+    values.push(mainImageUrl);
+  }
+  
+  sql += ` WHERE id=?`;
+  values.push(id);
+  
+  db.query(sql, values, (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    
+    // Si on a des nouvelles photos, on supprime les anciennes et on insère les nouvelles
+    if (req.files && req.files.length > 0) {
+      db.query("DELETE FROM vehicle_images WHERE vehicle_id = ?", [id], (err) => {
+        if (err) console.error("Erreur suppression anciennes images:", err.message);
+        
+        const imageValues = req.files.map((file, index) => [
+          id,
+          `http://localhost:5000/uploads/${file.filename}`,
+          index === 0 // first image is main
+        ]);
+        
+        db.query("INSERT INTO vehicle_images (vehicle_id, url, is_main) VALUES ?", [imageValues], (err) => {
+          if (err) console.error("Erreur insertion images:", err.message);
+          res.json({ success: true, message: "Véhicule et photos modifiés avec succès !" });
+        });
+      });
+    } else {
+      res.json({ success: true, message: "Véhicule modifié avec succès !" });
+    }
+  });
+});
+
+// Récupérer les images d'un véhicule
+app.get("/api/vehicles/:id/images", (req, res) => {
+  const { id } = req.params;
+  db.query("SELECT * FROM vehicle_images WHERE vehicle_id = ?", [id], (err, results) => {
+    if (err) return res.status(500).json(err);
     res.json(results);
   });
 });
@@ -117,15 +242,6 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 5000;
-// Récupérer les images d'un véhicule
-app.get('/api/vehicles/:id/images', (req, res) => {
-  const { id } = req.params;
-  db.query('SELECT * FROM vehicle_images WHERE vehicle_id = ?', [id], (err, results) => {
-    if (err) return res.status(500).json(err);
-    res.json(results);
-  });
-});
-
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });

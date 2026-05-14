@@ -46,4 +46,20 @@ export const api = {
     const res = await fetch(`${API_URL}/vehicles/${id}/images`);
     return res.json();
   },
+
+  async createVehicle(formData) {
+    const res = await fetch(`${API_URL}/vehicles`, {
+      method: "POST",
+      body: formData, // FormData — no Content-Type header (browser sets multipart boundary)
+    });
+    return res.json();
+  },
+
+  async updateVehicle(id, formData) {
+    const res = await fetch(`${API_URL}/vehicles/${id}`, {
+      method: "PUT",
+      body: formData,
+    });
+    return res.json();
+  },
 };
