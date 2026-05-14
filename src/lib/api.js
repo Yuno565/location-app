@@ -15,8 +15,12 @@ export const api = {
     return res.json();
   },
 
-  async getReservations() {
-    const res = await fetch(`${API_URL}/reservations`);
+  async getReservations(agencyName = null) {
+    let url = `${API_URL}/reservations`;
+    if (agencyName) {
+      url += `?agency_name=${encodeURIComponent(agencyName)}`;
+    }
+    const res = await fetch(url);
     return res.json();
   },
 
@@ -25,6 +29,15 @@ export const api = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+    });
+    return res.json();
+  },
+
+  async updateReservationStatus(id, status) {
+    const res = await fetch(`${API_URL}/reservations/${id}/status`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
     });
     return res.json();
   }

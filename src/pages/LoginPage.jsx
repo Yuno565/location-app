@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Car, User, Shield, Eye, EyeOff, ChevronRight, CheckCircle } from "lucide-react";
+import { Car, User, Shield, Eye, EyeOff, ChevronRight, CheckCircle, Building2 } from "lucide-react";
 
 // Comptes de démonstration
 const ACCOUNTS = {
@@ -109,35 +109,43 @@ export default function LoginPage() {
           </div>
 
           {/* Role selector */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-3 gap-3 mb-8">
             <RoleCard
               id="role-client"
               icon={User}
               title="Client"
-              desc="Réservez & gérez vos locations"
+              desc="Réservez vos voitures"
               active={role === "client"}
               onClick={() => handleRoleSelect("client")}
-              hint="client@email.ma / client123"
+            />
+            <RoleCard
+              id="role-agency"
+              icon={Building2}
+              title="Entreprise"
+              desc="Gérez vos locations"
+              active={role === "agency"}
+              onClick={() => handleRoleSelect("agency")}
             />
             <RoleCard
               id="role-admin"
               icon={Shield}
-              title="Administrateur"
-              desc="Gérez toutes les réservations"
+              title="Admin"
+              desc="Vue globale"
               active={role === "admin"}
               onClick={() => handleRoleSelect("admin")}
-              hint="admin@marocauto.ma / admin123"
             />
           </div>
 
           {/* Login Form */}
           {role && (
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-2">
-                <p className="text-xs text-white/40 mb-1 uppercase tracking-wider">Compte de démonstration</p>
-                <p className="text-sm text-primary font-mono">
-                  {role === "admin" ? "admin@marocauto.ma" : "client@email.ma"} / 
-                  <span className="text-white/60"> {role === "admin" ? "admin123" : "client123"}</span>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-2 text-center">
+                <p className="text-[10px] text-white/40 mb-1 uppercase tracking-wider">Compte de test</p>
+                <p className="text-xs text-primary font-mono">
+                  {role === "admin" && "admin@marocauto.ma"}
+                  {role === "agency" && "agence@autolux.ma"}
+                  {role === "client" && "client@email.ma"}
+                  <span className="text-white/40 ml-2">/ agency123</span>
                 </p>
               </div>
 
