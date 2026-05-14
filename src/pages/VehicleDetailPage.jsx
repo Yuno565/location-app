@@ -213,7 +213,16 @@ export default function VehicleDetailPage() {
       </div>
 
       {showReservation && (
-        <ReservationModal vehicle={vehicle} onClose={() => setShowReservation(false)} />
+        <ReservationModal 
+          vehicle={vehicle} 
+          onClose={() => setShowReservation(false)} 
+          onConfirm={async (reservation) => {
+            const res = await api.createReservation(reservation);
+            if (res.success) {
+              console.log("Réservation enregistrée !");
+            }
+          }}
+        />
       )}
     </div>
   );
