@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Car, User, Shield, Eye, EyeOff, ChevronRight, CheckCircle, Building2 } from "lucide-react";
 
-// Comptes de démonstration
+// Comptes de démonstration (pour information)
 const ACCOUNTS = {
   admin: [
-    { email: "admin@marocauto.ma", password: "admin123", name: "Mohammed El Idrissi" },
+    { email: "admin@marocauto.ma", password: "pass123", name: "Mohammed El Idrissi" },
   ],
   client: [
-    { email: "client@email.ma", password: "client123", name: "Youssef El Amrani" },
-    { email: "fatima@email.ma",  password: "client123", name: "Fatima Zahra Benali" },
+    { email: "client@email.ma", password: "pass123", name: "Youssef El Amrani" },
+  ],
+  agency: [
+    { email: "agence@autolux.ma", password: "pass123", name: "Responsable AutoLux" },
   ],
 };
 
