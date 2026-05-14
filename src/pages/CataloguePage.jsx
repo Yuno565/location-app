@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Search, MapPin, Users, Fuel, Settings2, Filter, X } from "lucide-react";
 import ReservationModal from "../components/ReservationModal";
 import { api } from "../lib/api";
@@ -239,10 +239,11 @@ function FilterSelect({ label, value, onChange, options, allLabel }) {
 }
 
 function VehicleCard({ vehicle, onDetail, onReserve }) {
+  const navigate = useNavigate();
   return (
     <div className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
       {/* Image — click to see details */}
-      <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={() => window.location.href = `/vehicule/${vehicle.id}`}>
+      <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={() => navigate(`/vehicule/${vehicle.id}`)}>
         <img
           src={vehicle.image_url}
           alt={`${vehicle.brand} ${vehicle.model}`}
