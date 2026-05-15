@@ -13,22 +13,22 @@ const STATS = [
 const CITIES = [
   {
     name: "Marrakech",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Koutoubia-Minaret.jpg/800px-Koutoubia-Minaret.jpg",
+    image: "/cities/marrakech.jpg",
     desc: "La Koutoubia"
   },
   {
     name: "Casablanca",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Mosque_Hassan_II.jpg/1280px-Mosque_Hassan_II.jpg",
+    image: "/cities/casablanca.jpg",
     desc: "Mosquée Hassan II"
   },
   {
     name: "Tanger",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Cap_Spartel%2C_Tangier%2C_Morocco_-_panoramio_%281%29.jpg/1280px-Cap_Spartel%2C_Tangier%2C_Morocco_-_panoramio_%281%29.jpg",
+    image: "/cities/tanger.webp",
     desc: "Cap Spartel"
   },
   {
     name: "Agadir",
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/90/South_view_sea_side_from_Kasbah_of_Agadir_Oufella.jpg",
+    image: "/cities/agadir.jpg",
     desc: "La Baie d'Agadir"
   },
 ];
@@ -54,7 +54,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1539129790489-e82aa9d3fc5f?w=1920&q=80"
+            src="/hero.jpeg"
             alt="Désert du Sahara Maroc"
             className="w-full h-full object-cover"
           />
