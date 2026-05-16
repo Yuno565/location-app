@@ -153,7 +153,8 @@ export const RESERVATIONS = [
     total_days: 5,
     total_price: 4250,
     payment_method: "Carte bancaire",
-    status: "Confirmée"
+    status: "Confirmée",
+    agency_name: "AutoLux Casablanca"
   },
   {
     id: "r2",
@@ -168,7 +169,8 @@ export const RESERVATIONS = [
     total_days: 4,
     total_price: 4800,
     payment_method: "PayPal",
-    status: "En cours"
+    status: "En cours",
+    agency_name: "PremiumCar Marrakech"
   },
   {
     id: "r3",
@@ -183,7 +185,8 @@ export const RESERVATIONS = [
     total_days: 5,
     total_price: 1250,
     payment_method: "Paiement sur place",
-    status: "Terminée"
+    status: "Terminée",
+    agency_name: "EcoCar Agadir"
   },
   {
     id: "r4",
@@ -198,7 +201,8 @@ export const RESERVATIONS = [
     total_days: 5,
     total_price: 12500,
     payment_method: "Carte bancaire",
-    status: "En attente"
+    status: "En attente",
+    agency_name: "LuxeDrive Marrakech"
   },
   {
     id: "r5",
@@ -213,6 +217,7 @@ export const RESERVATIONS = [
     total_days: 4,
     total_price: 1600,
     payment_method: "Carte bancaire",
-    status: "Annulée"
+    status: "Annulée",
+    agency_name: "ToyotaRent Rabat"
   },
 ];

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Car, User, Shield, Eye, EyeOff, ChevronRight, CheckCircle, Building2 } from "lucide-react";
 
@@ -17,6 +18,7 @@ const ACCOUNTS = {
 
 export default function LoginPage() {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [role, setRole] = useState(null); // "client" | "admin"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +43,7 @@ export default function LoginPage() {
     const res = await login(email, password);
 
     if (res.success) {
-      // Success handled by context update
+      navigate("/");
     } else {
       setError(res.message || "Email ou mot de passe incorrect.");
     }

@@ -58,6 +58,20 @@ db.connect((err) => {
 
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
+
+  // Bypass MySQL if password is "pass123" for testing the 3 spaces
+  if (password === "pass123") {
+    if (email === "admin@marocauto.ma") {
+      return res.json({ success: true, user: { name: "Mohammed El Idrissi", email, role: "admin" } });
+    }
+    if (email === "agence@autolux.ma") {
+      return res.json({ success: true, user: { name: "Responsable AutoLux", email, role: "agency", agency_name: "AutoLux Casablanca" } });
+    }
+    if (email === "client@email.ma") {
+      return res.json({ success: true, user: { name: "Youssef El Amrani", email, role: "client" } });
+    }
+  }
+
   const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
   db.query(sql, [email, password], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });

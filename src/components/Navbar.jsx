@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Car, LogOut, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
@@ -7,6 +7,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const isHome = location.pathname === "/";
 
@@ -64,7 +65,10 @@ export default function Navbar() {
               <span className="font-medium">{user?.name}</span>
             </div>
             <button
-              onClick={logout}
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
               className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
                 isHome && !scrolled
                   ? "text-white/70 hover:bg-white/10"
